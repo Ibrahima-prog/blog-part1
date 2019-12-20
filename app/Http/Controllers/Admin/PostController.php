@@ -43,7 +43,7 @@ return view('admin.post.show');
             'body'=>'required'
 
         ]);
-$post= new post;
+$post= new post; //app/model/post
 $post->title=$request->title;
 $post->subtitle=$request->subtitle;
 $post->slug=$request->slug;
