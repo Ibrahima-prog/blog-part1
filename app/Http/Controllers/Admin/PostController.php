@@ -14,7 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-return view('admin.post.show');
+        $posts=post::all();
+
+
+return view('admin.post.show',compact('posts'));
     }
 
     /**
@@ -71,7 +74,8 @@ return redirect(route('post.index'));
      */
     public function edit($id)
     {
-        //
+        $post=post::where('id',$id)->first();
+        return view('admin.post.edit',compact('post'));
     }
 
     /**
@@ -83,7 +87,20 @@ return redirect(route('post.index'));
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'title'=>'required',
+            'subtitle'=>'required',
+            'slug'=>'required',
+            'body'=>'required'
+
+        ]);
+$post=  post::find($id); //app/model/post
+$post->title=$request->title;
+$post->subtitle=$request->subtitle;
+$post->slug=$request->slug;
+$post->body=$request->body;
+$post->save();
+return redirect(route('post.index'));
     }
 
     /**
@@ -94,6 +111,7 @@ return redirect(route('post.index'));
      */
     public function destroy($id)
     {
-        //
+post::where('id',$id)->delete()
+;return redirect()->back();
     }
 }

@@ -32,19 +32,22 @@
            @include('includes.messages');
                 <!-- /.card-header -->
                 <!-- form start -->
-            <form role="form" action="{{route('tag.store')}}" method="POST">
+            <form role="form" action="{{route('tag.update',$tag->id)}}" method="POST">
                 {{ csrf_field() }}
+                {{ method_field('PATCH') }}
                   <div class="card-body">
                       <div class="offset-lg-4 col-lg-5">
 <div class="form-group">
                       <label for="title">Tag title</label>
-                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter tag title">
+                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter tag title"
+                      value="{{$tag->name}}">
                     </div>
 
 
                       <div class="form-group">
                         <label for="title">Tag slug</label>
-                        <input type="text" class="form-control" name="slug" id="slug" placeholder="Enter slug">
+                        <input type="text" class="form-control" name="slug" id="slug" placeholder="Enter slug"
+                        value="{{$tag->slug}}">
                       </div>
   </div>
 
