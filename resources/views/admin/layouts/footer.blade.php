@@ -46,15 +46,7 @@
 {{-- <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script> --}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
-<script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
-<script>
-$(function(){
 
-CKEDITOR.replace('editor1');
-$(".textarea").wysihtml5();
-
-});
-</script>
 @section('footersection')
 
 @show
