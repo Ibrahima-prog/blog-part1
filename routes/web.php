@@ -25,16 +25,21 @@ Route::get('post/category/{category}','HomeController@category')->name('category
 
 
 //Admin routes
-Route::group(['namespace' => 'Admin'], function () {
+Route::group(['namespace' => 'Admin','middleware'], function () {
     Route::get('admin/home','HomeController@index')->name('admin.home');
     //post routes
   Route::resource('admin/post', 'PostController');
      //user routes
      Route::resource('admin/user', 'UserController');
+     Route::resource('admin/role', 'RoleController');
   //tag routes
 Route::resource('admin/tag', 'TagController');
 //category routes
 Route::resource('admin/category', 'CategoryController');
+Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+Route::post('admin-login', 'Auth\LoginController@login');
+
+
 });
 
 

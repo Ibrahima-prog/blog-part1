@@ -32,8 +32,8 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Users</h3>
-        <a class="offset-5 btn btn-success" href="{{route('user.create')}}">Add new</a>
+          <h3 class="card-title">Roles</h3>
+        <a class="offset-5 btn btn-success" href="{{route('role.create')}}">Add new</a>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -53,21 +53,19 @@
                     <thead>
                     <tr>
                       <th>S.No</th>
-                      <th>user Name</th>
-
+                      <th>Role </th>
                       <th>Edit</th>
                       <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($roles as $role)
                        <tr>
                       <td>{{$loop->index+1}}</td>
-                      <td>{{$user->name}}</td>
-
-                      <td><a href="{{route('user.edit',$user->id)}}"><i class="fas fa-edit" style="font-size: 20px;"></i></a></td>
+                      <td>{{$role->name}}</td>
+                      <td><a href="{{route('role.edit',$role->id)}}"><i class="fas fa-edit" style="font-size: 20px;"></i></a></td>
                       <td>
-                      <form id="delete-form-{{$user->id}}" method="POST" action="{{route('user.destroy',$user->id)}}" style="display: none">
+                      <form id="delete-form-{{$role->id}}" method="POST" action="{{route('role.destroy',$role->id)}}" style="display: none">
                     {{ csrf_field() }}
                     {{method_field('DELETE')}}
 
@@ -77,7 +75,7 @@
                          onclick="if(confirm('Are you sure you want to delete?'))
                          {
                              event.preventDefault();
-                         document.getElementById('delete-form-{{$user->id}}').submit();
+                         document.getElementById('delete-form-{{$role->id}}').submit();
                          }
                          else{
                              event.preventDefault()
@@ -92,7 +90,7 @@
                     <tfoot>
                     <tr>
                         <th>S.No</th>
-                        <th>user Name</th>
+                        <th>Role </th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>

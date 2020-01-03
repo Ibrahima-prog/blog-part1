@@ -27,40 +27,27 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Add admin</h3>
+                  <h3 class="card-title">Titles</h3>
                 </div>
            @include('includes.messages');
                 <!-- /.card-header -->
                 <!-- form start -->
-            <form role="form" action="{{route('user.store')}}" method="POST">
+            <form role="form" action="{{route('tag.update',$tag->id)}}" method="POST">
                 {{ csrf_field() }}
+                {{ method_field('PATCH') }}
                   <div class="card-body">
                       <div class="offset-lg-4 col-lg-5">
 <div class="form-group">
-                      <label for="name">Admin name</label>
-                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter tag title">
+                      <label for="title">Tag title</label>
+                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter tag title"
+                      value="{{$tag->name}}">
                     </div>
 
 
                       <div class="form-group">
-                        <label for="email">Admin email</label>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
-                      </div>
-                      <div class="form-group">
-                        <label for="password">Admin Password</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
-                      </div>
-                      <div class="form-group">
-                        <label for="Confirm_password">Confirm Password</label>
-                        <input type="password" class="form-control" name="Confirm_password" id="Confirm_password" placeholder=" Confirm  password">
-                      </div>
-                      <div class="form-group">
-                        <label for="role">Role</label>
-                     <select name="role" id="" class="form-control">
-                        <option value="0">Editor</option>
-                        <option value="1">Publisher</option>
-                        <option value="2">Writer</option>
-                    </select>
+                        <label for="title">Tag slug</label>
+                        <input type="text" class="form-control" name="slug" id="slug" placeholder="Enter slug"
+                        value="{{$tag->slug}}">
                       </div>
   </div>
 

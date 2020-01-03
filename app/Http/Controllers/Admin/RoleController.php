@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\user\category;
+use App\Model\admin\admin;
+use App\Model\admin\role;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class RoleController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=category::all();
-        return view('admin.category.show',compact('categories'));
+$roles=role::all();
+        return  view('admin.role.show',compact('roles'));
     }
 
     /**
@@ -30,8 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.category');
-
+return view('admin.role.create');
     }
 
     /**
@@ -43,17 +39,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name'=>'required',
-
-            'slug'=>'required'
-
-
-        ]);
-        $category= new category(); //app/model/category
-$category->name=$request->name;
-$category->slug=$request->slug;
-$category->save();
-return redirect(route('category.index'));
+        'name'=>'required|max:50|unique:roles']);
+        $role=new role;
+        $role->name=$request->name;
+        $role->save();
+        return redirect(route('role.index'));
     }
 
     /**
@@ -64,7 +54,7 @@ return redirect(route('category.index'));
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -75,8 +65,7 @@ return redirect(route('category.index'));
      */
     public function edit($id)
     {
-        $category=category::where('id',$id)->first();
-        return view('admin.category.edit',compact('category'));
+        //
     }
 
     /**
@@ -88,18 +77,7 @@ return redirect(route('category.index'));
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'name'=>'required',
-
-            'slug'=>'required'
-
-
-        ]);
-        $category=  category::find($id); //app/model/category
-$category->name=$request->name;
-$category->slug=$request->slug;
-$category->save();
-return redirect(route('category.index'));
+        //
     }
 
     /**
@@ -110,7 +88,7 @@ return redirect(route('category.index'));
      */
     public function destroy($id)
     {
-        category::where('id',$id)->delete()
-        ;return redirect()->back();
+        role::where('id',$id)->delete();
+        return redirect()->back();
     }
 }
