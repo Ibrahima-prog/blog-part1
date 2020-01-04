@@ -27,59 +27,32 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Add admin</h3>
+                  <h3 class="card-title">Edit Permission</h3>
                 </div>
            @include('includes.messages');
                 <!-- /.card-header -->
                 <!-- form start -->
-            <form role="form" action="{{route('user.store')}}" method="POST">
+            <form role="form" action="{{route('permission.update',$permission->id)}}" method="POST">
                 {{ csrf_field() }}
+                {{method_field('PATCH')}}
                   <div class="card-body">
                       <div class="offset-lg-4 col-lg-5">
 <div class="form-group">
-                      <label for="name">Admin name</label>
-                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter tag title">
+                      <label for="title">Permission </label>
+                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter permission title"
+                      value="{{$permission->name}}">
                     </div>
 
 
-                      <div class="form-group">
-                        <label for="email">Admin email</label>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
-                      </div>
-                      <div class="form-group">
-                        <label for="password">Admin Password</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
-                      </div>
-                      <div class="form-group">
-
-                        <label for="Confirm_password">Confirm Password</label>
-                        <input type="password" class="form-control" name="Confirm_password" id="Confirm_password" placeholder=" Confirm  password">
-                      </div>
-                      <div class="form-group">
-                        <label for="">Assign roles</label>
-                        <div class="row">
-
-                            @foreach ($roles as $role)
-                             <div class="col-lg-4">
-
-                                     <div class="checkbox">
-                                         <label for=""><input type="checkbox" name="role[]" value="{{$role->id}}">{{$role->name}}</label>
-                                     </div>
-         </div>
-
-                                     @endforeach
-                        </div>
-
-</div>
 
   </div>
-<button type="submit" class="btn btn-primary offset-md-4">Submit</button>
-<a  href="{{route('tag.index')}}" class="btn btn-warning offset-md-4">Back</a>
 
 
 
 
 
+  <button type="submit" class="btn btn-primary offset-md-4">Submit</button>
+<a  href="{{route('permission.index')}}" class="btn btn-warning offset-md-4">Back</a>
 
                   </div>
                   <!-- /.card-body -->

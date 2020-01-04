@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\admin\admin;
-use App\Model\admin\role;
+use App\Model\admin\Permission;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-$roles=role::all();
-        return  view('admin.role.show',compact('roles'));
+        $permissions=Permission::all();
+        return view('admin.permission.show',compact('permissions'));
     }
 
     /**
@@ -27,7 +26,7 @@ $roles=role::all();
      */
     public function create()
     {
-return view('admin.role.create');
+        return view('admin.permission.create');
     }
 
     /**
@@ -38,63 +37,64 @@ return view('admin.role.create');
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
-        'name'=>'required|max:50|unique:roles']);
-        $role=new role;
-        $role->name=$request->name;
-        $role->save();
-        return redirect(route('role.index'));
+            'name'=>'required|max:50|unique:permissions']);
+            $permission=new Permission();
+            $permission->name=$request->name;
+            $permission->save();
+            return redirect(route('permission.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Model\admin\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Model\admin\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
-        $role= role::find($id);
-        return view('admin.role.edit',compact('role'));
+        $permission= Permission::find($id);
+        return view('admin.permission.edit',compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Model\admin\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $this->validate($request,[
             'name'=>'required|max:50']);
-            $role= role::find($id);
-            $role->name=$request->name;
-            $role->save();
-            return redirect(route('role.index'));
+            $permission= Permission::find($id);
+            $permission->name=$request->name;
+            $permission->save();
+            return redirect(route('permission.index'))->with('message','permission updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Model\admin\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        role::where('id',$id)->delete();
-        return redirect()->back();
+        Permission::where('id',$id)->delete();
+        return redirect()->back()->with('message','permission deleted successfully');
     }
 }

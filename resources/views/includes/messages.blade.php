@@ -3,3 +3,10 @@
 <p class="alert alert-danger">{{$error}}</p>
 @endforeach
 @endif
+
+
+
+@if (session()->has('message'))
+<a href="" class="alert alert-success">{{session('message')}}</a>
+
+@endif

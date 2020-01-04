@@ -27,28 +27,24 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Titles</h3>
+                  <h3 class="card-title">Edit Role</h3>
                 </div>
            @include('includes.messages');
                 <!-- /.card-header -->
                 <!-- form start -->
-            <form role="form" action="{{route('tag.update',$tag->id)}}" method="POST">
+            <form role="form" action="{{route('role.update',$role->id)}}" method="POST">
                 {{ csrf_field() }}
-                {{ method_field('PATCH') }}
+                {{method_field('PATCH')}}
                   <div class="card-body">
                       <div class="offset-lg-4 col-lg-5">
 <div class="form-group">
-                      <label for="title">Tag title</label>
-                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter tag title"
-                      value="{{$tag->name}}">
+                      <label for="title">Role </label>
+                      <input type="text" class="form-control" name="name" id="name" placeholder="Enter role title"
+                      value="{{$role->name}}">
                     </div>
 
 
-                      <div class="form-group">
-                        <label for="title">Tag slug</label>
-                        <input type="text" class="form-control" name="slug" id="slug" placeholder="Enter slug"
-                        value="{{$tag->slug}}">
-                      </div>
+
   </div>
 
 
@@ -56,7 +52,7 @@
 
 
   <button type="submit" class="btn btn-primary offset-md-4">Submit</button>
-<a  href="{{route('tag.index')}}" class="btn btn-warning offset-md-4">Back</a>
+<a  href="{{route('role.index')}}" class="btn btn-warning offset-md-4">Back</a>
 
                   </div>
                   <!-- /.card-body -->
