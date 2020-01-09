@@ -42,7 +42,15 @@
                     </div>
 
 
-
+<div class="form-group">
+    <label for="for">Permission for
+        <select name="for" id="for" class="form-control">
+            <option value="user">User</option>
+            <option value="post">Post</option>
+            <option value="other">Other</option>
+        </select>
+    </label>
+</div>
   </div>
 
 

@@ -27,47 +27,40 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Add admin</h3>
+                  <h3 class="card-title">Update admin</h3>
                 </div>
            @include('includes.messages');
                 <!-- /.card-header -->
                 <!-- form start -->
-            <form role="form" action="{{route('user.store')}}" method="POST">
+            <form role="form" action="{{route('user.update',$user->id)}}" method="POST">
                 {{ csrf_field() }}
+                {{method_field('PUT')}}
                   <div class="card-body">
                       <div class="offset-lg-4 col-lg-5">
 
                         <div class="form-group">
                       <label for="name">Admin name</label>
                       <input type="text" class="form-control" name="name" id="name" placeholder="Enter tag title"
-                     value="{{old('name')}}" >
+                      value="@if(old('name')) {{old('name')}}@else{{$user->name}}@endif" >
                     </div>
                     <div class="form-group">
                         <label for="name">phone</label>
                         <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone number"
-                        value="{{old('phone')}}">
+                        value="@if(old('phone')) {{old('phone')}}@else{{$user->phone}}@endif">
                       </div>
 
                       <div class="form-group">
                         <label for="email">Admin email</label>
                         <input type="text" class="form-control" name="email" id="email" placeholder="Enter email"
-                        value="{{old('email')}}" >
+                        value="@if(old('email')) {{old('email')}}@else{{$user->email}}@endif" >
                       </div>
-                      <div class="form-group">
-                        <label for="password">Admin Password</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password"
-                        value="{{old('password')}}" >
-                      </div>
-                      <div class="form-group">
 
-                        <label for="password_confirmation">Confirm Password</label>
-                        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder=" Confirm  password">
-                      </div>
                       <div class="form-group">
 
                         <label for="Confirm_password">Status</label>
                         <div class="checkbox">
-                            <label for=""><input type="checkbox" name="status" @if ( old('status')==1)
+                            <label for=""><input type="checkbox" name="status"
+                                 @if ( old('status')==1 || $user->status)
                                 checked
 
                             @endif value="1">Status</label>
@@ -81,7 +74,14 @@
                              <div class="col-lg-4">
 
                                      <div class="checkbox">
-                                         <label for=""><input type="checkbox" name="role[]" value="{{$role->id}}">{{$role->name}}</label>
+                                         <label for=""><input type="checkbox" name="role[]" value="{{$role->id}}"
+                                            @foreach ($user->roles as $user_role)
+                                                @if ($user_role->id==$role->id)
+                                               checked
+                                                @endif
+                                            @endforeach>
+                                            {{$role->name}}</label>
+
                                      </div>
          </div>
 

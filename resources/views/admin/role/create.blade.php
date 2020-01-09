@@ -42,15 +42,85 @@
                     </div>
 
 
-
-  </div>
-
+                    <div class="row">
 
 
+
+                        <div class="col-lg-6">
+
+                                <label for="name">Post Permissions </label><div class="checkbox">
+                                @foreach ($permissions as $permission)
+                                @if ($permission->for=='post')
+
+                                          <label for=""><input type="checkbox" name="permission[]" value="{{$permission->id}}">{{$permission->name}}</label>
+
+
+                                     @endif
+                                 @endforeach
+                            </div>
+
+                           </div>
+                        <div class="col-lg-6">
+                            <label for="title">User Permissions </label>
+
+                            <div class="checkbox">
+
+                                @foreach ($permissions as $permission)
+                                @if ($permission->for=='user')
+
+                                          <label for=""><input type="checkbox" name="permission[]" value="{{$permission->id}}">{{$permission->name}}</label>
+
+
+                                     @endif
+                                 @endforeach
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <div class="col-lg-6">
+
+                            <label for="title">Other Permissions </label>
+
+
+                            <div class="checkbox">
+
+
+                                @foreach ($permissions as $permission)
+
+                                @if ($permission->for=='other')
+
+
+                                <label for=""><input type="checkbox" name="permission[]" value="{{$permission->id}}">{{$permission->name}}</label>
+
+
+
+                                @endif
+
+                                @endforeach
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    </div>
 
 
   <button type="submit" class="btn btn-primary offset-md-4">Submit</button>
 <a  href="{{route('role.index')}}" class="btn btn-warning offset-md-4">Back</a>
+                </div>
+
+
+
+
+
 
                   </div>
                   <!-- /.card-body -->
