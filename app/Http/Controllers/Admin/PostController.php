@@ -7,6 +7,7 @@ use App\Model\user\category;
 use Illuminate\Http\Request;
 use App\Model\user\post;
 use App\Model\user\tag;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -35,10 +36,13 @@ return view('admin.post.show',compact('posts'));
      */
     public function create()
     {
-        $tags=tag::all();
-        $categories=category::all();
-        return view('admin.post.post',compact('tags','categories'));
+        if(Auth::user()->can('posts.create')){
 
+            $tags=tag::all();
+            $categories=category::all();
+            return view('admin.post.post',compact('tags','categories'));
+        }
+return redirect(route('admin.home'));
     }
 
     /**
@@ -97,10 +101,13 @@ return redirect(route('post.index'));
      */
     public function edit($id)
     {
+        if(Auth::user()->can('posts.create')){
         $post=post::with('tags','categories')->where('id',$id)->first();
         $tags=tag::all();
         $categories=category::all();
         return view('admin.post.edit',compact('tags','categories','post'));
+        }
+        return redirect(route('admin.home'));
 
     }
 

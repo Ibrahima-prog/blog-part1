@@ -20,7 +20,10 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Posts</h3>
+          @can('posts.create', Auth::user())
+
           <a class="offset-5 btn btn-success" href="{{route('post.create')}}">Add new</a>
+          @endcan
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -45,8 +48,16 @@
                           <th>Subtitle</th>
                           <th>Slug</th>
                           <th>Date Created</th>
-                          <th>Edit</th>
-                          <th>Delete</th>
+
+                          @can('posts.update', Auth::user())
+<th>Edit</th>
+
+                          @endcan
+                          @can('posts.delete', Auth::user())
+<th>Delete</th>
+
+                          @endcan
+
                         </tr>
                         </thead>
                         <tbody>
@@ -58,25 +69,33 @@
                           <td>{{$post->slug}}</td>
                           <td>{{$post->created_at}}</td>
 
-                           <td><a href="{{route('post.edit',$post->id)}}"><i class="fas fa-edit" style="font-size: 20px;"></i></a></td>
+                          @can('posts.update', Auth::user())
+
+
+                          <td><a href="{{route('post.edit',$post->id)}}"><i class="fas fa-edit" style="font-size: 20px;"></i></a></td>
+                          @endcan
+                          @can('posts.delete', Auth::user())
+
                           <td>
-                          <form id="delete-form-{{$post->id}}" method="POST" action="{{route('post.destroy',$post->id)}}" style="display: none">
-                        {{ csrf_field() }}
-                        {{method_field('DELETE')}}
 
-                        </form>
+                            <form id="delete-form-{{$post->id}}" method="POST" action="{{route('post.destroy',$post->id)}}" style="display: none">
+                          {{ csrf_field() }}
+                          {{method_field('DELETE')}}
 
-                            <a href=""
-                             onclick="if(confirm('Are you sure you want to delete?'))
-                             {
-                                 event.preventDefault();
-                             document.getElementById('delete-form-{{$post->id}}').submit();
-                             }
-                             else{
-                                 event.preventDefault()
-                                 }
-                                 ">
-                             <i class="fas fa-trash" style="font-size: 20px;"></i></a></td>
+                          </form>
+
+                              <a href=""
+                               onclick="if(confirm('Are you sure you want to delete?'))
+                               {
+                                   event.preventDefault();
+                               document.getElementById('delete-form-{{$post->id}}').submit();
+                               }
+                               else{
+                                   event.preventDefault()
+                                   }
+                                   ">
+                               <i class="fas fa-trash" style="font-size: 20px;"></i></a></td>                          @endcan
+
                         </tr>
                        @endforeach
 
@@ -89,8 +108,14 @@
                             <th>Subtitle</th>
                             <th>Slug</th>
                             <th>Date Created</th>
+                            @can('posts.update', Auth::user())
                             <th>Edit</th>
+
+                                                      @endcan
+                                                      @can('posts.delete', Auth::user())
                             <th>Delete</th>
+
+                                                      @endcan
                         </tr>
                         </tfoot>
                       </table>

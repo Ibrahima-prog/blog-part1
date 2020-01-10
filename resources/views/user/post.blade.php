@@ -14,7 +14,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <small>created  {{$post->created_at->diffForHumans()}}</small>
+            <small>created  {{$post->created_at}}</small>
             @foreach ($post->categories as $category)
                 <small class="float-right" style="margin-right: 20px">
                 <a href="{{route('category',$category->slug)}}">{{$category->name}}</a>
