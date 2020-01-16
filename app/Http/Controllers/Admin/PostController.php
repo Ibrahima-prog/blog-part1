@@ -66,16 +66,16 @@ return redirect(route('admin.home'));
             }
 
 
-$post= new post; //app/model/post
-$post->image=$imageName;
-$post->title=$request->title;
-$post->subtitle=$request->subtitle;
-$post->slug=$request->slug;
-$post->body=$request->body;
-$post->status=$request->status;
-$post->save();
-$post->tags()->sync($request->tags);
-$post->categories()->sync($request->categories);
+    $post= new post; //app/model/post
+    $post->image=$imageName;
+    $post->title=$request->title;
+    $post->subtitle=$request->subtitle;
+    $post->slug=$request->slug;
+    $post->body=$request->body;
+    $post->status=$request->status;
+    $post->save();
+    $post->tags()->sync($request->tags);
+    $post->categories()->sync($request->categories);
 
 
 

@@ -11,6 +11,9 @@
     <div class="container">
       <div class="row">
        Welcome...
+       {{-- {{$user->name}} --}}
+       
+
     </div>
   </article>
 

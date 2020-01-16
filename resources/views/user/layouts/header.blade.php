@@ -27,15 +27,48 @@
                   @if (Auth::guest())
                        <a class="nav-link" href="{{route('login')}}">login</a>
                   @else
+
                   <a class="dropdown-item" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                    {{ __('Logout') }}
+
                </a>
 
                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                    @csrf
                </form>
+               <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+
+                <i class="fa fa-bell"></i></a>
+
+                @if ($user->unreadnotifications->count())
+
+                <span class="badge badge-light">{{$user->unreadnotifications->count()}}</span>
+                @endif
+                <ul class="dropdown-menu">
+
+                    <li >
+                    <a style="color: green" href="{{route('mark')}}">Mark all as read</a>
+                </li>
+                    @foreach ($user->unreadnotifications as $notification)
+
+                    <li>
+                        <a style="background-color: gray " href="#">{{$notification->data['data']}}</a>
+
+                    </li>
+                    @endforeach
+
+                    @foreach ($user->readnotifications as $notification)
+
+                    <li>
+                        <a href="#">{{$notification->data['data']}}</a>
+
+                    </li>
+                    @endforeach
+                </ul>
+            </li>
                   @endif
 
               </li>

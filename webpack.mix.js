@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require("dotenv").config();
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +12,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js(['resources/js/app.js','resources/js/my.js'], 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+
+   mix.browserSync('http://ibrahima/');

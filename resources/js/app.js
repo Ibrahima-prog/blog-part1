@@ -47,3 +47,13 @@ mounted(){
       });
 }
 });
+const app1 = new Vue({
+    el: '#app1',
+
+created(){
+    Echo.private('testChannel')
+    .listen('TaskEvent', (e) => {
+        console.log(e);
+    });
+}
+});

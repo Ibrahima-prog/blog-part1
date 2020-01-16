@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        commands\hello::class,
+        commands\rename::class
+
     ];
 
     /**
